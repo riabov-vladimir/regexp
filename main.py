@@ -1,5 +1,6 @@
 from phone_number_formatter.phone_number_replacer import phone_number_replacer
 import csv
+from phone_number_formatter.merger import merge_contacts
 from pprint import pprint
 
 with open("C:/Users/79055/PycharmProjects/regexp/data/phonebook_raw.csv", encoding='utf-8') as f:
@@ -26,11 +27,22 @@ for contact in contacts_list:
         contact[0] = temp[0]
         contact[1] = temp[1]
 
+
 contacts_list1 = contacts_list.copy()
 
-for contact in contacts_list1:
-    contacts_list1.remove(contact)
-    for y in contacts_list1:
-        if y[0] == contact[0]:
-            print(y[0], contact[0])
-            print('---------------------------------------------------')
+for contact1 in contacts_list1:
+    contacts_list1.remove(contact1)
+    for contact2 in contacts_list1:
+        if contact2[0] == contact1[0]:
+            new_contacts_list.append(merge_contacts(contact1, contact2))
+
+for contact_merged in new_contacts_list:
+    print(contact_merged)
+    for contact in contacts_list.copy():
+        if contact[0] == contact_merged[0]:
+            contacts_list.remove(contact)
+            print(f'{contact} deleted')
+
+contacts_list.extend(new_contacts_list)
+pprint(contacts_list)
+# pprint(new_contacts_list)

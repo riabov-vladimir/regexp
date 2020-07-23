@@ -16,11 +16,3 @@ def merge_contacts(contact_a: list, contact_b: list) -> list:
 			contact_merged[index] = contact_a[index]
 
 	return contact_merged
-
-
-if __name__ == '__main__':
-	contact_b = ['Лагунцов', '', 'Алексеевич', 'Минфин', '', '+7(495)913-11-11 доб.0792', '']
-	contact_a = ['', 'Иван', '', '', '', '', 'Ivan.Laguntcov@minfin.ru']
-
-	a = merge_contacts(contact_a, contact_b)
-	print(a)
